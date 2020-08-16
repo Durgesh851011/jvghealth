@@ -1,0 +1,45 @@
+<nb-card>
+    <nb-card-header>{{pageTitle}} Sub Disease</nb-card-header>
+    <form [formGroup]="subDiseaseForm" (ngSubmit)="onSubmit()">
+      <nb-card-body>
+        <div class="row ml-2 mr-2">
+          <div class="col-sm-12">
+            <div class="text-center">
+              <img class="img-fluid img-thumbnail" [src]="imgURL" alt="Profile" style="height: 120px; width:120px;">
+              <div class="upload-imgs">
+                <label class="custom-file-upload">
+                  <input class="hidden-input" type="file" accept='image/*' (change)="onSelectFile($event)">
+                  Upload Picture
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <span><b>Disease name</b>
+              <font color="red"> *</font>
+            </span>
+            <div class="input-group">
+              <input type="text" formControlName="name" fullWidth nbInput fullWidth placeholder="Disease's Name">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <span><b>Disease</b>
+              <font color="red"> *</font>
+            </span>
+            <div class="input-group">
+              <nb-select formControlName="diseaseId" fullWidth>
+                <nb-option *ngFor="let item of diseaseData" [value]="item.diseaseId">{{item.name}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div class="ml-2 mb-2">
+            <button class="cancel" routerLink="/pages/subdisease/list/" nbButton status="danger">Cancel</button>
+            <button nbButton class="ml-2" status="success" type="submit">Submit</button>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+  
+      </nb-card-footer>
+    </form>
+  </nb-card>

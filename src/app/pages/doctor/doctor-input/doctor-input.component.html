@@ -1,0 +1,172 @@
+<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+  <div class="">
+    <h3 *ngIf="doctorId==undefined">Add Doctor</h3>
+    <h3 *ngIf="doctorId">Edit Doctor</h3>
+    <div class="maincont">
+      <div class="col-lg-12">
+        <nb-card>
+          <nb-card-body class="frm_pad_btm">
+            <div class="row">
+              <div class="col-sm-2">
+                <div class="text-left">
+                  <img class="img-fluid img-thumbnail" [src]="imgURL" alt="Profile" style="height: 120px; width:120px;">
+                  <div class="upload-imgs">
+                    <label class="custom-file-upload">
+                      <input class="hidden-input" type="file" accept='image/*' (change)="onSelectFile($event)">
+                      Upload Picture
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-10 text-left">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <span><b>Doctor name</b>
+                      <font color="red"> *</font>
+                    </span>
+                    <div class="input-group">
+                      <input type="text" formControlName="name" nbInput fullWidth placeholder="Doctor's Name" [ngClass]="{ 'is-invalid': submitted}">
+                      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">This field is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <span><b>Doctor Cost</b>
+                      <font color="red"> *</font>
+                    </span>
+                    <div class="input-group">
+                      <input type="text" formControlName="doctorCost" nbInput fullWidth placeholder="Doctor Cost"
+                        [ngClass]="{ 'is-invalid': submitted}">
+                      <div *ngIf="submitted && f.doctorCost.errors" class="invalid-feedback">
+                        <div *ngIf="f.doctorCost.errors.required">This field is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <span><b>Phone</b>
+                      <font color="red"> *</font>
+                    </span>
+                    <div class="input-group">
+                      <input type="text" formControlName="phone" nbInput fullWidth placeholder="Phone" [ngClass]="{ 'is-invalid': submitted}">
+                      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                        <div *ngIf="f.phone.errors.required">This field is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <span><b>Email</b>
+                      <font color="red"> *</font>
+                    </span>
+                    <div class="input-group">
+                      <input type="text" formControlName="email" nbInput fullWidth placeholder="Email" [ngClass]="{ 'is-invalid': submitted}">
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">This field is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <span><b>Availability</b>
+                  <font color="red"> *</font>
+                </span>
+                <div class="input-group">
+                  <input type="text" formControlName="availability" nbInput fullWidth placeholder="Availability"
+                    [ngClass]="{ 'is-invalid': submitted}">
+                  <div *ngIf="submitted && f.availability.errors" class="invalid-feedback">
+                    <div *ngIf="f.availability.errors.required">This field is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row"> <span class="ml-3"><b>Experence</b></span><br></div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <nb-select formControlName="experienceYear" fullWidth>
+                          <nb-option *ngFor="let item of yearList" [value]="item">{{item}} Year</nb-option>
+                      </nb-select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <nb-select formControlName="experienceMonth" fullWidth>
+                        <nb-option *ngFor="let item of monthList" [value]="item">{{item}} Month</nb-option>
+                      </nb-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-6">
+                <span><b>City</b>
+                  <!-- <font color="red"> *</font> -->
+                </span>
+                <div class="input-group">
+                  <nb-select (selectedChange)="GetHospitalListByCityId($event)" formControlName="cityId" fullWidth>
+                    <nb-option value="0">Select City</nb-option>
+                    <nb-option *ngFor="let item of cityList" [value]="item.cityId">{{item.name}}</nb-option>
+                  </nb-select>
+                  <div *ngIf="submitted && f.cityId.errors" class="invalid-feedback">
+                    <div *ngIf="f.cityId.errors.required">This field is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <span><b>Hospital</b>
+                  <!-- <font color="red"> *</font> -->
+                </span>
+                <div class="input-group">
+                  <nb-select formControlName="hospitalId" fullWidth>
+                    <nb-option value="0">Select Hospital</nb-option>
+                    <nb-option *ngFor="let item of hospitalList" [value]="item.hospitalId">{{item.name}}</nb-option>
+                  </nb-select>
+                  <div *ngIf="submitted && f.hospitalId.errors" class="invalid-feedback">
+                    <div *ngIf="f.hospitalId.errors.required">This field is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngFor="let control of getControls(doctorForm, 'speciality'); let i = index" [formGroup]="doctorForm.controls['speciality'].controls[i]">
+              <div class="col-sm-5">
+                <span><b>Speciality {{i+1}}</b></span>
+                <div class="input-group">
+                  <nb-select formControlName="specialityId" fullWidth>
+                    <nb-option *ngFor="let item of specialityList" [value]="item.specialityId">{{item.name}}</nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+              <div class="col-sm-5">
+                <span><b>Amount of Speciality {{i+1}}</b></span>
+                <div class="input-group">
+                  <input type="text" formControlName="amount" nbInput fullWidth placeholder="Amount">
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-xl-2 col-sm-2" style="top: 28px;">
+                <button class="btn btn-primary" *ngIf="(i+1) == doctorForm.controls['speciality'].controls.length"
+                  (click)="addmoreSpeciality()" title="Add another" style="cursor: pointer;"><i class="nb-plus"></i></button>
+                &nbsp;<button class="btn btn-danger dangercolor" (click)="DeleteSpecialityInput(i)" *ngIf="i > 0" title="Delete forever"
+                  style="cursor: pointer;"><i class="nb-trash"></i></button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary ">Submit</button>
+            &nbsp;<button class="btn btn-danger dangercolor"  routerLink="/pages/doctor/list/" role="button">Cancel</button>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- <div *ngIf="loader" id="cover-spin"></div> -->

@@ -1,0 +1,55 @@
+<div class="login_center">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>JVG Health</h1>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="login_right">
+        <form (ngSubmit)="checkUser()" #form="ngForm" aria-labelledby="title">
+          <p class="errmsg">{{errmsg}}</p>
+          <div class="form-control-group">
+            <label class="label" for="input-email">Email address:</label>
+            <input nbInput fullWidth [(ngModel)]="user.Username" #Username="ngModel" name="Username" id="input-email"
+              pattern=".+@.+\..+" placeholder="Email address" autofocus [attr.aria-invalid]="Username.invalid && Username.touched ? true : null">
+            <ng-container *ngIf="Username.invalid && Username.touched">
+              <p class="error-message" *ngIf="Username.errors?.required">
+                Email is required!
+              </p>
+              <p class="error-message" *ngIf="Username.errors?.pattern">
+                Email should be the real one!
+              </p>
+            </ng-container>
+          </div>
+
+          <div class="form-control-group">
+            <label class="label" for="input-password">Password:</label>
+            <input nbInput fullWidth [(ngModel)]="user.Password" #Password="ngModel" name="Password" type="Password" id="input-password"
+              placeholder="Password" [status]="Password.dirty ? (Password.invalid  ? 'danger' : 'success') : ''"
+              [attr.aria-invalid]="Password.invalid && Password.touched ? true : null">
+            <ng-container *ngIf="Password.invalid && Password.touched ">
+              <p class="error-message" *ngIf="Password.errors?.required">
+                Password is required!
+              </p>
+
+            </ng-container>
+          </div>
+
+
+          <button nbButton fullWidth status="success" [disabled]="submitted || !form.valid" [class.btn-pulse]="submitted">
+            Log In
+          </button>
+
+          <!-- <div class="login_btm text-center">        
+                  <a (click)="navigateToForgotPassword()">
+                    Forgot Password?
+                  </a>
+                </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

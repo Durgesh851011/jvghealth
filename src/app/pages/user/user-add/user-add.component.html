@@ -1,0 +1,74 @@
+<form [formGroup]="domainForm" (ngSubmit)="onSubmit()">
+
+  <div class="">
+    <h3 *ngIf="userId==undefined">Add Store</h3>
+    <h3 *ngIf="userId">Edit Store</h3>
+    <div class="maincont">
+      <div class="col-lg-6">
+        <nb-card>
+          <nb-card-body class="frm_pad_btm">
+            <span><b>First name</b>
+              <font color="red"> *</font>
+            </span>
+            <div class="input-group">
+              <input type="text" formControlName="firstname" nbInput fullWidth placeholder="First name"
+                [ngClass]="{ 'is-invalid': submitted}">
+              <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                <div *ngIf="f.firstname.errors.required">This field is required</div>
+              </div>
+            </div>
+            <span><b>Last name</b>
+              <font color="red"> *</font>
+            </span>
+            <div class="input-group">
+              <input type="text" formControlName="lastname" nbInput fullWidth placeholder="Last name"
+                [ngClass]="{ 'is-invalid': submitted}">
+              <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                <div *ngIf="f.lastname.errors.required">This field is required</div>
+              </div>
+            </div>
+            <span><b>Mobile number</b>
+              <font color="red"> *</font>
+            </span>
+            <div class="input-group">
+              <input type="text" formControlName="mobile_number" nbInput fullWidth placeholder="Mobile number"
+                [ngClass]="{ 'is-invalid': submitted}">
+              <div *ngIf="submitted && f.mobile_number.errors" class="invalid-feedback">
+                <div *ngIf="f.mobile_number.errors.required">This field is required</div>
+              </div>
+            </div>
+            <span><b>Email</b>
+              <font color="red"> *</font>
+            </span>
+            <div class="input-group">
+              <input type="text" formControlName="email" nbInput fullWidth placeholder="Email"
+                [ngClass]="{ 'is-invalid': submitted}">
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">This field is required</div>
+              </div>
+            </div>
+
+            <span><b>Password</b>
+              <font color="red"> *</font>
+            </span>
+            <div class="input-group">
+              <input type="text" formControlName="password" nbInput fullWidth placeholder="Password"
+                [ngClass]="{ 'is-invalid': submitted}">
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">This field is required</div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary ">Submit</button>
+            &nbsp;<a class="btn btn-danger dangercolor" href="/pages/user/lists" role="button">Cancel</a>
+          </nb-card-body>
+        </nb-card>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
+
+<!-- <div *ngIf="loader" id="cover-spin"></div> -->

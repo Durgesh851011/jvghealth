@@ -1,0 +1,93 @@
+<nb-card>
+  <nb-card-header>
+    Lab Report Order List
+  </nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<div id="fullPagePopup" class="fullPagePopup">
+  <div *ngIf="orderDetailPopupShowHide">
+    <h3 style="background-color: #f1ebeb;">Lab Report Order Detail</h3>
+    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+    <div class="container-fluid">
+      <div class="col-md-12" style="overflow:hidden">
+        <div class="mt-2 row text-left">
+          <div class="col-md-6">
+            <table>
+              <tr>
+                <th>Order No</th>
+                <td></td>
+                <td>#{{singleOrderDetail.orderId}}</td>
+              </tr>
+              <tr>
+                <th>Order By</th>
+                <td></td>
+                <td>{{singleOrderDetail.name}}</td>
+              </tr>
+              <tr>
+                <th>Order Created On</th>
+                <td></td>
+                <td>{{singleOrderDetail.createtime}}</td>
+              </tr>
+              <tr>
+                <th>Order Status</th>
+                <td></td>
+                <td>{{singleOrderDetail.orderStatus}}</td>
+              </tr>
+              <tr>
+                <th>Phone</th>
+                <td></td>
+                <td>{{singleOrderDetail.phone}}</td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td></td>
+                <td>{{singleOrderDetail.full_address}}, {{singleOrderDetail.landmark}}, {{singleOrderDetail.city}},
+                  {{singleOrderDetail.pincode}}</td>
+              </tr>
+            </table>
+            <div class="row mt-2">
+              <div class="col-md-6">Update Order Status:</div>
+              <div class="col-md-6">
+                <form>
+                  <div class="input-group">
+                    <select name="name" [(ngModel)]="singleOrderDetail.orderStatus" (ngModelChange)="onChange($event)">
+                      <option *ngFor="let item of orderStatusArr" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5>Item Detail</h5>
+            <table class="table table-hover">
+              <tr>
+                <th>Medicine Name</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Sub Total</th>
+              </tr>
+              <tbody>
+                <tr *ngFor="let item of singleOrderItemDetail">
+                  <td>{{item.medicineName}}</td>
+                  <td>{{item.qty}}</td>
+                  <td class="text-right">{{item.price}}</td>
+                  <td class="text-right">{{item.subTotal}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"></td>
+                  <td>Total</td>
+                  <td class="text-right">{{singleOrderDetail.totalAmount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

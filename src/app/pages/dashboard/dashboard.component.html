@@ -1,0 +1,40 @@
+<div class="row">
+  <nb-alert class="alert col-md-4" status="primary" accent="warning">Total Doctor :
+    {{dashboardTotalCountData.toalDoctor}}</nb-alert>
+  <nb-alert class="alert col-md-4" status="success" accent="info">Total Hospital : {{dashboardTotalCountData.toalUser}}</nb-alert>
+  <nb-alert class="alert col-md-4" status="warning" accent="primary">Total Appointment :
+    {{dashboardTotalCountData.toalAppointment}}</nb-alert>
+  <nb-alert class="alert col-md-4" status="info" accent="success">Total User : {{dashboardTotalCountData.toalHospital}}</nb-alert>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <nb-card>
+      <nb-card-header>
+        <div d-flex justify-content-between>
+          Latest(20) Medicine Order
+        <!-- <a class="add-action" routerLink="/pages/user/input"><i class="nb-plus"></i></a> -->
+        </div>
+      </nb-card-header>
+    
+      <nb-card-body>
+        <ng2-smart-table [settings]="MedicineOrderSettings" [source]="MedicineOrderSource">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-md-6">
+    <nb-card>
+      <nb-card-header>
+        <div d-flex justify-content-between>
+          Latest(20) Appointment
+        <!-- <a class="add-action" routerLink="/pages/user/input"><i class="nb-plus"></i></a> -->
+        </div>
+      </nb-card-header>
+    
+      <nb-card-body>
+        <ng2-smart-table [settings]="AppointmentSettings" [source]="AppointmentSource">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

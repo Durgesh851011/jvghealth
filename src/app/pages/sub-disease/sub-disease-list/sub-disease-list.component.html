@@ -1,0 +1,14 @@
+<nb-card>
+    <nb-card-header>
+      <div d-flex justify-content-between>
+       Sub Disease List
+        <a class="add-action" routerLink="/pages/subdisease/input"><i class="nb-plus"></i></a>
+      </div>
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>
+  
